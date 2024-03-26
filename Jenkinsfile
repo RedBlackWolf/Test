@@ -1,9 +1,15 @@
 pipeline {
-    agent { dockerfile true }
+    agent any
+    environment { 
+        CC = 'clang'
+    }
     stages {
-        stage('Test') {
+        stage('Example') {
+            environment { 
+                DEBUG_FLAGS = '-g'
+            }
             steps {
-                sh 'echo aaaa'
+                sh 'printenv'
             }
         }
     }
