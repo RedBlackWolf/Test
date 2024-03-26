@@ -13,6 +13,11 @@ node {
         // mvnHome = tool 'Maven 3.6.0'
     }
 
+    def customImage = docker.build("rhel8:latest")
+
+    customImage.inside {
+        sh 'cat /etc/redhat-release'
+    }
     // mvn 빌드로 jar파일을 생성하는 stage
     // stage('Build'){  
     //     sh "echo 'Build Spring Boot Jar'"
@@ -25,9 +30,9 @@ node {
     // }
 
     //dockerfile기반 빌드하는 stage ,git소스 root에 dockerfile이 있어야한다
-    stage('Build image'){   
-        app = docker.build("rhel8")
-    }
+    // stage('Build image'){   
+    //     app = docker.build("rhel8")
+    // }
 
 
     //docker image를 push하는 stage, 필자는 dockerhub에 이미지를 올렸으나 보통 private image repo를 별도 구축해서 사용하는것이 좋음
